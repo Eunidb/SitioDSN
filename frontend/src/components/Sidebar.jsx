@@ -1,12 +1,12 @@
-import { Link, useNavigate, useLocation } from "react-router-dom"; // Importa useLocation
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import '../index.css';
 
-// Import icons from react-icons (assuming you've installed it as discussed previously)
-import { FaHome, FaUsers, FaUserCog, FaFileAlt, FaCog, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaUsers, FaFileAlt, FaCog, FaSignOutAlt } from 'react-icons/fa';
 
-function Sidebar({ user }) {
+
+function Sidebar() {
   const navigate = useNavigate();
-  const location = useLocation(); // Obtiene el objeto de ubicación actual
+  const location = useLocation();
 
   const handleLogout = async () => {
     await fetch("http://localhost:3000/api/logout", {
@@ -23,7 +23,6 @@ function Sidebar({ user }) {
       <nav className="sidebar-nav">
         <Link
           to="/dashboard"
-          // Aplica 'active' si la ruta actual es '/dashboard'
           className={`nav-item ${location.pathname === "/dashboard" ? "active" : ""}`}
         >
           <FaHome className="mr-2" />
@@ -31,27 +30,13 @@ function Sidebar({ user }) {
         </Link>
         <Link
           to="/estudiantes"
-          // Aplica 'active' si la ruta actual es '/estudiantes'
           className={`nav-item ${location.pathname === "/estudiantes" ? "active" : ""}`}
         >
           <FaUsers className="mr-2" />
           Estudiantes
         </Link>
-
-        {user?.rol === "admin" && (
-          <Link
-            to="/usuarios"
-            // Aplica 'active' si la ruta actual es '/usuarios'
-            className={`nav-item ${location.pathname === "/usuarios" ? "active" : ""}`}
-          >
-            <FaUserCog className="mr-2" />
-            Usuarios
-          </Link>
-        )}
-
         <Link
           to="/formularios-general"
-          // Aplica 'active' si la ruta actual es '/formularios-general'
           className={`nav-item ${location.pathname === "/formularios-general" ? "active" : ""}`}
         >
           <FaFileAlt className="mr-2" />
@@ -59,7 +44,6 @@ function Sidebar({ user }) {
         </Link>
         <Link
           to="/configuracion"
-          // Aplica 'active' si la ruta actual es '/configuracion'
           className={`nav-item ${location.pathname === "/configuracion" ? "active" : ""}`}
         >
           <FaCog className="mr-2" />

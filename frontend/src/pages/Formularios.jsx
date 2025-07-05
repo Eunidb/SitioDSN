@@ -44,11 +44,11 @@ function Formularios() {
     // Señales de Alarma / Alerta (ALE) - Inicializa con los nombres del esquema
     sa_doloresCabezaVisionBorrosaMareo: "",
     sa_dificultadHigieneVestirse: "",
-    sa_miedoAgresionTristeza: "",
-    sa_necesitaAcercarseObjetos: "",
+    sa_miedoAgresionTristeza: "", // Este campo se agregó al JSX
+    sa_necesitaAcercarseObjetos: "", // Este campo se agregó al JSX
     sa_caeFrecuentementeCorrer: "",
-    sa_orinaCamaNoches: "",
-    sa_distraeFacilmente: "",
+    sa_orinaCamaNoches: "", // Este campo se agregó al JSX
+    sa_distraeFacilmente: "", // Este campo se agregó al JSX
     // Señales de Alerta específicas para 31-36 meses (siempre al final de las señales de alarma generales)
     sa_dificultadPinza: "",
     sa_apegoExcesivoPadres: "",
@@ -380,10 +380,13 @@ function Formularios() {
           <h2 className="seccion-titulo">Señales de Alarma</h2>
           <div className="pregunta-container">
             {[
-            
               { q: "¿Babea constantemente o habla de manera poco entendible?", name: "sa_doloresCabezaVisionBorrosaMareo" }, 
               { q: "¿Sólo usa palabras aisladas y no frases?", name: "sa_dificultadHigieneVestirse" }, 
               { q: "¿Se cae frecuentemente y le cuesta trabajo subir o bajar escaleras?", name: "sa_caeFrecuentementeCorrer" },
+              { q: "¿Muestra miedo excesivo, agresión o tristeza sin razón aparente?", name: "sa_miedoAgresionTristeza" }, // ¡Pregunta agregada!
+              { q: "¿Necesita acercarse mucho a los objetos (ojos) o a las personas (oído) para verlos o escucharlos?", name: "sa_necesitaAcercarseObjetos" }, // ¡Pregunta agregada!
+              { q: "¿Orina la cama frecuentemente durante las noches (después de los 3 años)?", name: "sa_orinaCamaNoches" }, // ¡Pregunta agregada!
+              { q: "¿Se distrae fácilmente o le cuesta mantener la atención en una actividad?", name: "sa_distraeFacilmente" }, // ¡Pregunta agregada!
               { q: "¿Ha perdido habilidades que antes tenía?", name: "sa_perdidaHabilidades" }
             ].map((item, i) => (
               <label key={i} className="pregunta-texto">
@@ -397,7 +400,7 @@ function Formularios() {
             ))}
           </div>
           {/* === SEÑALES DE ALERTA (ESPECÍFICAS 31-36 MESES) === */}
-          <h2 className="seccion-titulo">Señales de Alerta (31-36 meses)</h2>
+          <h2 className="seccion-titulo">Señales de Alerta</h2>
           <div className="pregunta-container">
             {[
               { q: "¿Le cuesta trabajo tomar un lápiz o un crayón con los dedos índice, pulgar y medio?", name: "sa_dificultadPinza" },

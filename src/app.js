@@ -5,7 +5,6 @@ import formRoutes from "./routes/form.routes.js";
 import cors from 'cors'
 
 import authRoutes from "./routes/auth.routes.js";
-import userRoutes from "./routes/user.routes.js"; 
 
 const app = express();
 
@@ -22,6 +21,5 @@ app.use(cookieParser());
 
 app.use("/api", authRoutes);
 app.use("/api", formRoutes);
-app.use('/api', userRoutes);
 
 export default app;

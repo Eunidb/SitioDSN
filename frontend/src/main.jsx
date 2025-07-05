@@ -7,7 +7,6 @@ import Inicio from "./pages/Inicio.jsx"
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
-import Usuarios from "./pages/usuarios.jsx"
 import Estudiantes from "./pages/Estudiantes.jsx";
 import Formularios from "./pages/Formularios.jsx";
 import FormulariosGeneral from "./pages/FormularioGeneral.jsx";
@@ -28,7 +27,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/estudiantes" element={<Estudiantes />} />
-        <Route path="/usuarios" element={<Usuarios/>} />
         <Route path="/" element={<FormulariosGeneral />} /> 
         <Route path="/formularios-general" element={<FormulariosGeneral />} />
         <Route path="/formulario-grupo-general" element={<Formularios />} /> 

@@ -1,78 +1,56 @@
 import mongoose from "mongoose";
 
-const formSchema = new mongoose.Schema({
+const formularioSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
   edad: { type: Number, required: true },
-  grado: { type: String, enum: ['1', '2', '3'], required: true },
+  grado: { type: String, required: true }, // o Number si usas 1, 2, 3
   grupo: { type: String, required: true },
-  color: { type: String, enum: ['verde', 'amarillo', 'rojo'], required: true },
+  color: { type: String, enum: ["verde", "amarillo", "rojo"], required: true },
+  usuario: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   fecha: { type: Date, default: Date.now },
-  usuario: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 
-  // Factores de Riesgo Biológico (FRB) - 7 preguntas
-  frb_asistenciaConsultas: { type: String, enum: ['SI', 'NO'], required: false },
-  frb_complicacionesEmbarazo: { type: String, enum: ['SI', 'NO'], required: false },
-  frb_gestacionMenor34Semanas: { type: String, enum: ['SI', 'NO'], required: false },
-  frb_pesoNacimiento1500g: { type: String, enum: ['SI', 'NO'], required: false },
-  frb_retardoRespiracionCircularCordon: { type: String, enum: ['SI', 'NO'], required: false },
-  frb_hospitalizacionUCIN: { type: String, enum: ['SI', 'NO'], required: false },
-  frb_madreMenor16: { type: String, enum: ['SI', 'NO'], required: false },
+  // FRB
+  frb_asistenciaConsultas: String,
+  frb_complicacionesEmbarazo: String,
+  frb_gestacionMenor34Semanas: String,
+  frb_pesoNacimiento1500g: String,
+  frb_retardoRespiracionCircularCordon: String,
+  frb_hospitalizacionUCIN: String,
+  frb_madreMenor16: String,
 
-  // Para Exploración Neurológica (EN) - 3 preguntas
-  en_alteracionMovilidadCuerpo: { type: String, enum: ['SI', 'NO'], required: false },
-  en_alteracionAsimetriaOjosFacial: { type: String, enum: ['SI', 'NO'], required: false },
-  en_perimetroCefalicoDE: { type: String, enum: ['SI', 'NO'], required: false },
+  // EN
+  en_alteracionMovilidadCuerpo: String,
+  en_alteracionAsimetriaOjosFacial: String,
+  en_perimetroCefalicoDE: String,
 
-  // Para Desarrollo (General para todos los rangos de edad)
-  // Nota: Los campos a continuación son genéricos y capturarán la respuesta SI/NO
-  // para las 3 preguntas más relevantes de cada área para el rango de edad evaluado.
+  // Desarrollo
+  dev_mg_brincarUnPie: String,
+  dev_mg_brincarHaciaAtras: String,
+  dev_mg_caminarLineaRecta: String,
 
-  // Motriz Gruesa
-  dev_mg_habilidad1: { type: String, enum: ['SI', 'NO'], required: false },
-  dev_mg_habilidad2: { type: String, enum: ['SI', 'NO'], required: false },
-  dev_mg_habilidad3: { type: String, enum: ['SI', 'NO'], required: false },
-  
-  // Motriz Fina
-  dev_mf_habilidad1: { type: String, enum: ['SI', 'NO'], required: false },
-  dev_mf_habilidad2: { type: String, enum: ['SI', 'NO'], required: false },
-  dev_mf_habilidad3: { type: String, enum: ['SI', 'NO'], required: false },
-  
-  // Lenguaje
-  dev_len_habilidad1: { type: String, enum: ['SI', 'NO'], required: false },
-  dev_len_habilidad2: { type: String, enum: ['SI', 'NO'], required: false },
-  dev_len_habilidad3: { type: String, enum: ['SI', 'NO'], required: false },
-  
-  // Social
-  dev_soc_habilidad1: { type: String, enum: ['SI', 'NO'], required: false },
-  dev_soc_habilidad2: { type: String, enum: ['SI', 'NO'], required: false },
-  dev_soc_habilidad3: { type: String, enum: ['SI', 'NO'], required: false },
+  dev_mf_dibujarTriangulo: String,
+  dev_mf_tocarPuntaPulgar: String,
+  dev_mf_cortarPapelTijeras: String,
 
-  // Para Área de Conocimiento (Movida de Señales de Alarma para claridad semántica)
-  dev_con_escribirNumerosLetras: { type: String, enum: ['SI', 'NO'], required: false },
-  dev_con_completarOracionesOpuesto: { type: String, enum: ['SI', 'NO'], required: false },
-  dev_con_identificaValorMonedas: { type: String, enum: ['SI', 'NO'], required: false },
+  dev_len_hablarClaridad: String,
+  dev_len_comunicarEmociones: String,
+  dev_len_seguirOrdenesTresPasos: String,
 
-  // Para Señales de Alarma / Alerta (ALE)
-  sa_doloresCabezaVisionBorrosaMareo: { type: String, enum: ['SI', 'NO'], required: false },
-  sa_dificultadHigieneVestirse: { type: String, enum: ['SI', 'NO'], required: false },
-  sa_miedoAgresionTristeza: { type: String, enum: ['SI', 'NO'], required: false }, // Puede cubrir timidez, llanto por separación, etc.
-  sa_necesitaAcercarseObjetos: { type: String, enum: ['SI', 'NO'], required: false },
-  sa_caeFrecuentementeCorrer: { type: String, enum: ['SI', 'NO'], required: false },
-  sa_orinaCamaNoches: { type: String, enum: ['SI', 'NO'], required: false },
-  sa_distraeFacilmente: { type: String, enum: ['SI', 'NO'], required: false }, // Puede cubrir la pérdida de atención.
+  dev_soc_compartirCosas: String,
+  dev_soc_gustoIrEscuela: String,
+  dev_soc_esperaTurno: String,
 
-  // Nuevos campos sugeridos para Señales de Alerta específicas de grupos de edad
-  sa_ignoraOtrosNinos: { type: String, enum: ['SI', 'NO'], required: false }, // Para 49-59 meses
-  sa_perdidaHabilidades: { type: String, enum: ['SI', 'NO'], required: false }, // Para 49-59 meses
-  sa_erroresPluralesPasado: { type: String, enum: ['SI', 'NO'], required: false }, // Para 37-48 meses
-  sa_noDiceNombreApellido: { type: String, enum: ['SI', 'NO'], required: false }, // Para 37-48 meses
-  sa_noExpresaEmociones: { type: String, enum: ['SI', 'NO'], required: false }, // Para 37-48 meses
-  sa_dificultadPinza: { type: String, enum: ['SI', 'NO'], required: false }, // Para 31-36 meses
-  sa_apegoExcesivoPadres: { type: String, enum: ['SI', 'NO'], required: false }, // Para 31-36 meses
-  sa_juegoSolitario: { type: String, enum: ['SI', 'NO'], required: false }, // Para 31-36 meses
-
-}, {
-  timestamps: true,
+  // SA
+  sa_escribirNumerosLetras: String,
+  sa_completarOracionesOpuesto: String,
+  sa_identificaValorMonedas: String,
+  sa_doloresCabezaVisionBorrosaMareo: String,
+  sa_dificultadHigieneVestirse: String,
+  sa_miedoAgresionTristeza: String,
+  sa_necesitaAcercarseObjetos: String,
+  sa_caeFrecuentementeCorrer: String,
+  sa_orinaCamaNoches: String,
+  sa_distraeFacilmente: String,
 });
 
-export default mongoose.model("Formulario", formSchema);
+export default mongoose.model("Formulario", formularioSchema);
